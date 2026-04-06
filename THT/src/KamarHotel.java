@@ -41,11 +41,11 @@ public class KamarHotel {
     }
 
     public void setTipeKamar(String tipeKamar) {
-        if(tipeKamar.equalsIgnoreCase("Regular") || tipeKamar.equalsIgnoreCase("Premium") || tipeKamar.equalsIgnoreCase("Suite")){
+        if(tipeKamar.equalsIgnoreCase("Reguler") || tipeKamar.equalsIgnoreCase("Premium") || tipeKamar.equalsIgnoreCase("Suite")){
             this.tipeKamar = tipeKamar;
         } else {
-            System.out.println("Tipe kamar tidak valid. Tipe kamar diatur ke 'Regular' secara default.");
-            this.tipeKamar = "Regular";
+            System.out.println("Tipe kamar tidak valid. Tipe kamar diatur ke Reguler.");
+            this.tipeKamar = "Reguler";
         }
     }
 
@@ -89,18 +89,18 @@ public class KamarHotel {
         }
     }
 
-    public void hitungTotalBayar(int jumlahMalam){
-        double totalBayar = hargaPerMalam * jumlahMalam;
-        System.out.println("Total bayar untuk kamar " + nomorKamar + " selama " + jumlahMalam + " malam adalah: " + totalBayar);
+    public double hitungTotalBayar(int jumlahMalam) {
+        return hargaPerMalam * jumlahMalam;
     }
 
-    public void hitungTotalBayar(int jumlahMalam, String kodeVoucher){
-        if(kodeVoucher.equalsIgnoreCase("PROMO") && jumlahMalam >= 3){
-            double totalBayar = hargaPerMalam * jumlahMalam * 0.8; // Diskon 10%
-            System.out.println("Total bayar untuk kamar " + nomorKamar + " selama " + jumlahMalam + " malam dengan kode voucher PROMO adalah: " + totalBayar);
+    public double hitungTotalBayar(int jumlahMalam, String kodeVoucher) {
+        double total = hitungTotalBayar(jumlahMalam);
+        if (kodeVoucher.equalsIgnoreCase("PROMO") && jumlahMalam >= 3) {
+            System.out.println("Voucher PROMO diterima! Anda mendapatkan diskon 20%.");
+            return total * 0.8; // Diskon 20%
         } else {
-            System.out.println("Kode voucher tidak valid atau jumlah malam kurang dari 3. Penggunaan Voucher Ditolak.");
-            hitungTotalBayar(jumlahMalam); // Hitung tanpa diskon jika kode voucher tidak valid
+            System.out.println("Peringatan: Penggunaan voucher ditolak (syarat tidak terpenuhi).");
+            return hitungTotalBayar(jumlahMalam);
         }
     }
 
